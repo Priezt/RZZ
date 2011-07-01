@@ -1,0 +1,50 @@
+#control {
+	display: inline-block;
+	border-style: solid;
+	border-color: #000;
+	border-width: 2;
+	padding: 5;
+}
+
+#temp_place {
+	border-style: solid;
+	border-color: #777;
+	border-width: 5;
+	padding: 5;
+}
+
+#url_history {
+	cursor: pointer;
+	font-weight: bold;
+	display: block;
+}
+
+.div_block{
+	display: inline-block;
+	border-style: solid;
+	border-color: #CCC;
+	border-width: 2;
+	padding: 2;
+}
+
+.url_history_link {
+	cursor: pointer;
+	display: block;
+}
+
+.history_content {
+	display: block;
+}
+
+.url_hover {
+	background-color: #88F;
+}
+
+.one_piece {
+	display: inline-block;
+	border-style: dashed;
+	border-width: 2;
+	border-color: #F00;
+	padding: 2;
+	margin: 5;
+}
