@@ -1,0 +1,1 @@
+"C:\Documents and Settings\qi.zheng\Local Settings\Application Data\Google\Chrome\Application\chrome.exe" --enable-apps --pack-extension=C:\git\RZZ\RZZ --pack-extension-key=C:\git\RZZ\RZZ.pem --no-message-box

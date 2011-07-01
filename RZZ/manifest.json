@@ -1,0 +1,20 @@
+{
+	"name": "RZZ",
+	"version": "1.0",
+	"description": "DIY rss by your self",
+	"permissions": [
+		"http://*/*",
+		"https://*/*",
+		"tabs",
+		"notifications"
+	],
+	"icons": {
+		"128": "img/rss128.png",
+		"16": "img/rss16.png"
+	},
+	"app": {
+		"launch": {
+			"local_path": "main.html"
+		}
+	}
+}
