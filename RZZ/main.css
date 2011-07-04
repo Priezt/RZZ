@@ -48,3 +48,31 @@
 	padding: 2;
 	margin: 5;
 }
+
+#msg_div {
+	color: #F00;
+	display: block;
+	position: absolute;
+	left: 50;
+	top: 0;
+	font-weight: bold;
+	font-size: 20;
+	background-color: #FF8;
+	padding: 5;
+	border-style: solid;
+	border-width: 2;
+	border-color: #F00;
+}
+
+#piece_place {
+	border-style: solid;
+	border-width: 2;
+	border-color: #555;
+	padding: 5;
+}
+
+#rzz_title {
+	cursor: pointer;
+	font-weight: bold;
+	display: block;
+}

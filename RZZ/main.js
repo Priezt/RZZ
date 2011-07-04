@@ -1,7 +1,10 @@
 var source_visible = false;
 var content_visible = false;
 var url_history_visible = false;
+var rzz_list_visible = false;
 var url_history = new Array();
+var rzz_list = new Array();
+var current_rzz_selector = "";
 
 $(init);
 
@@ -14,8 +17,11 @@ function init(){
 	$("#toggle_content").click(toggle_content);
 	$("#history_content").hide();
 	$("#url_history").click(toggle_url_history);
+	$("#rzz_title").click(toggle_rzz_list);
 	$("#get_pieces").click(get_pieces);
 	$("#piece_place").hide();
+	$("#save_rzz").click(save_rzz);
+	$("#msg_div").hide();
 	console.log("init end");
 }
 
@@ -42,7 +48,7 @@ function get_pieces(){
 		var new_div = $("<div>");
 		new_div.addClass("one_piece");
 		//var html = $(this).html();
-		var html = $(this)[0].outerHtml;
+		var html = $("<div>").append($(this).clone()).remove().html();
 		console.log("found: " + html);
 		new_div[0].innerHTML = html;
 		$("#piece_place").append(new_div);
@@ -138,6 +144,7 @@ function fetch_url(){
 		$("#source_html").val(clear_data);
 		$("#temp_place").html(clear_data);
 		$("#temp_place").show("slow");
+		msg("url fetch complete");
 		content_visible = true;
 	});
 }
@@ -169,4 +176,102 @@ function remove_on_event(data){
 	var result = data.replace(/ on[a-z]+\=\"[\s\S]*?\"/gi, " ");
 	result = result.replace(/ on[a-z]+\=\'[\s\S]*?\'/gi, " ");
 	return result;
+}
+
+function save_rzz(){
+	var rzz_name = $("#rzz_name").val();
+	var rzz = $("#url").val()+"|"+$("#selector").val();
+	localStorage["rzz_" + rzz_name] = rzz;
+	if(localStorage["rzzlist"]){
+		rzz_list = JSON.parse(localStorage["rzzlist"]);
+	}
+	if(rzz_list.indexOf(rzz_name) < 0){
+		rzz_list.unshift(rzz_name);
+	}
+	localStorage["rzzlist"] = JSON.stringify(rzz_list);
+	console.log(rzz_name+": "+rzz);
+	msg("saved: " + rzz_name);
+}
+
+function msg(msg_text){
+	$("#msg_div").text(msg_text);
+	$("#msg_div").hide();
+	$("#msg_div").show(1000, function(){
+		$(this).delay(2000).hide(1000);
+	});
+}
+
+function toggle_rzz_list(){
+	console.log("toggle rzz list");
+	if(rzz_list_visible){
+		rzz_list_visible = false;
+		$("#rzz_list").hide("slow");
+	}else{
+		rzz_list_visible = true;
+		display_rzz_list();
+		$("#rzz_list").show("slow");
+	}
+}
+
+function display_rzz_list(){
+	console.log("display rzz list");
+	$("#rzz_list").empty();
+	$("#rzz_list").append($("<hr>"));
+	if(localStorage["rzzlist"]){
+		rzz_list = JSON.parse(localStorage["rzzlist"]);
+		console.log("found rzz: "+rzz_list.length);
+		for(var i=rzz_list.length-1;i>=0;i--){
+			var rzz_name = rzz_list[i];
+			var new_div = $("<div class=\"url_history_link\" onclick=\"select_rzz("+(i)+")\"></div>");
+			new_div.text(rzz_name);
+			new_div.hover(function(){
+				$(this).addClass("url_hover");
+			},function(){
+				$(this).removeClass("url_hover");
+			});
+			$("#rzz_list").append(new_div);
+		}
+	}
+}
+
+function select_rzz(idx){
+	//console.log("select index: " + idx);
+	var rzz_name = rzz_list[idx];
+	console.log("select rzz: " + rzz_name);
+	$("#rzz_list").hide();
+	rzz_list_visible = false;
+	$("#piece_place").empty();
+	$("#piece_place").show();
+	launch_rzz(rzz_name);
+}
+
+function launch_rzz(rzz_name){
+	var rzz_string = localStorage["rzz_"+rzz_name];
+	var parts = rzz_string.split("|");
+	var rzz_url = parts[0];
+	var rzz_selector = parts[1];
+	current_rzz_selector = rzz_selector;
+	$.get(rzz_url, cb_rzz_url_fetched);
+}
+
+function cb_rzz_url_fetched(data){
+	console.log("fetch success");
+	console.log("data length: " + data.length);
+	var clear_data = process_html(data);
+	$("#source_html").val(clear_data);
+	$("#temp_place").html(clear_data);
+	console.log("get pieces");
+	var selector_str = "#temp_place ";
+	selector_str += current_rzz_selector;
+	console.log("jquery selector: " + selector_str);
+	$(selector_str).each(function(){
+		//console.log("found one piece here");
+		var new_div = $("<div>");
+		new_div.addClass("one_piece");
+		var html = $("<div>").append($(this).clone()).remove().html();
+		console.log("found: " + html);
+		new_div[0].innerHTML = html;
+		$("#piece_place").append(new_div);
+	});
+	console.log("rzz completed");
 }

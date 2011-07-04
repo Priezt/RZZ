@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<div id="control">
-			<input type="text" id="url" placeholder="http://target.url/path" value="http://www.baidu.com/" size="60">
+			<input type="text" id="url" placeholder="http://target.url/path" value="" size="60"><br>
 			<div class="div_block">
 				<div id="url_history">URL history</div>
 				<div id="history_content"></div>
@@ -16,9 +16,15 @@
 			<input type="button" value="toggle content" id="toggle_content">
 			<input type="button" value="toggle source" id="toggle_source">
 			<br>
-			<input type="text" id="selector" placeholder="jquery selector here" value="" size="40">
-			<input type="button" value="get pieces" id="get_pieces">
+			<input type="text" id="selector" placeholder="jquery selector here" value="" size="40"><br>
+			<input type="button" value="get pieces" id="get_pieces"><br>
+			<input type="text" id="rzz_name" placeholder="rzz name" value=""  size="20">
+			<input type="button" value="save rzz" id="save_rzz">
 			<br>
+			<div class="div_block">
+				<div id="rzz_title">RZZ</div>
+				<div id="rzz_list"></div>
+			</div>
 		</div>
 		<br>
 		<div id="piece_place">
@@ -26,5 +32,6 @@
 		<div id="temp_place">
 		</div>
 		<textarea id="source_html" cols="80" rows="15"></textarea>
+		<div id="msg_div"></div>
 	</body>
 </html>
