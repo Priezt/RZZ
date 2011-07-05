@@ -76,3 +76,9 @@
 	font-weight: bold;
 	display: block;
 }
+
+#zgroup_title {
+	cursor: pointer;
+	font-weight: bold;
+	display: block;
+}

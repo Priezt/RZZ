@@ -15,7 +15,6 @@
 			<input type="button" value="get url" id="get_url">
 			<input type="button" value="toggle content" id="toggle_content">
 			<input type="button" value="toggle source" id="toggle_source">
-			<input type="button" value="toggle result" id="toggle_result">
 			<br>
 			<input type="text" id="selector" placeholder="jquery selector here" value="" size="40"><br>
 			<input type="button" value="get pieces" id="get_pieces"><br>

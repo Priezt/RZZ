@@ -272,7 +272,6 @@ function select_rzz(idx){
 	rzz_list_visible = false;
 	$("#piece_place").empty();
 	$("#piece_place").show();
-	piece_place_visible = true;
 	rzz_fifo.push(rzz_name);
 	launch_rzz();
 }
@@ -360,7 +359,6 @@ function launch_zgroup(zgroup_name){
 	console.log("total rzz count: " + rzz_fifo.length);
 	$("#piece_place").empty();
 	$("#piece_place").show();
-	piece_place_visible = true;
 	launch_rzz();
 }
 
